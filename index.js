@@ -4,6 +4,8 @@ const bodyparser= require("body-parser");
 const port = process.env.port || 3000;
 const { sql } = require("./db");
 const { errors } = require("celebrate");
+const { apiRouter } = require('./api');
+const cors = require('cors');
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
@@ -13,9 +15,8 @@ app.use(bodyparser.json());
     console.log('Database connected!');
 })();
 
-const { apiRouter } = require('./api');
-
 app.use('/api',apiRouter);
+app.use(cors());
 app.use(errors());
 
 app.listen(port,()=>{

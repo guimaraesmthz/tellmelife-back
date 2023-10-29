@@ -3,9 +3,20 @@ const usersRouter = express.Router();
 const { sql } = require('../db');
 const {celebrate,Joi,Segments} = require('celebrate');
 const bcrypt = require('bcrypt');
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
+
+const corsOptions = {
+    origin: ['http://localhost:3001','http://192.168.1.4:3001']
+};
+
+usersRouter.options("/login",cors(corsOptions),(req,res)=>{
+    res.status(200);
+})
 
 //User Login Route
-usersRouter.post("/login",celebrate({
+usersRouter.post("/login",cors(corsOptions),celebrate({
     [Segments.BODY]:Joi.object().keys({
         email:Joi.string().required().email(),
         password:Joi.string().required().min(7)
@@ -23,9 +34,14 @@ usersRouter.post("/login",celebrate({
         }else{
             const hashValid = await bcrypt.compare(password,result[0].password);
             if(hashValid){
+                const token = jwt.sign({
+                    email: email
+                },process.env.JWT_KEY,{
+                    expiresIn: "1h"
+                });
                 res.setHeader('Content-Type','application/json');
                 res.status(200);
-                res.send(JSON.stringify({control:{code:200,message:"User authorized."}}));
+                res.send(JSON.stringify({control:{code:200,message:"User authorized.",token:token}}));
             }else{
                 res.setHeader('Content-Type','application/json');
                 res.status(403);
