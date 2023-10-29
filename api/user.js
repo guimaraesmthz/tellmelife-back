@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config();
 
 const corsOptions = {
-    origin: ['http://localhost:3001','http://192.168.1.4:3001',]
+    origin: ['http://localhost:3001','http://192.168.1.4:3001','https://tellmelife.vercel.app/']
 };
 
 usersRouter.options("/login",cors(corsOptions),(req,res)=>{
