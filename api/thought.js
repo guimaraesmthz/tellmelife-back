@@ -40,8 +40,7 @@ thoughtRouter.put("/prethought",cors(corsOptions),checkAuth,celebrate({
 }),(req,res)=>{
     const thought = req.body.thought;
     (async function(){
-        //await sql`insert into prethought (thought) values(${thought})`;
-        await sql`select now();`
+        await sql`insert into prethought (thought) values(${thought})`;
     })()
     .then(()=>{
         res.setHeader('Content-Type','application/json');
