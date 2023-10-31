@@ -12,7 +12,6 @@ const corsOptions = {
 };
 
 thoughtRouter.options("/*",cors(corsOptions),(req,res)=>{
-    res.setHeader('Cache-Control','none');
     res.status(200);
 });
 
@@ -35,7 +34,7 @@ thoughtRouter.get("/findthought",cors(corsOptions),(req,res)=>{
     
 });
 
-thoughtRouter.put("/prethought",cors(corsOptions),checkAuth,celebrate({
+thoughtRouter.put("/prethought",cors(corsOptions),celebrate({
     [Segments.BODY]:Joi.object().keys({
         thought:Joi.string().required().max(400)
     })
