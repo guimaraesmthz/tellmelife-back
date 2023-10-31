@@ -54,7 +54,7 @@ usersRouter.post("/login",cors(corsOptions),celebrate({
 });
 
 //User Register Route
-usersRouter.post("/createuser",celebrate({
+usersRouter.post("/createuser",cors(corsOptions),celebrate({
     [Segments.BODY]:Joi.object().keys({
         name:Joi.string().required(),
         email:Joi.string().required().email(),
