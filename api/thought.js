@@ -6,14 +6,13 @@ const cors = require("cors");
 const checkAuth = require("./middleware/check-auth");
 
 const corsOptions = {
-    origin: ['http://localhost:3001','http://192.168.1.4:3001','https://tellmelife.vercel.app/*','http://localhost:3000',"https://tellmelife.vercel.app"],
-    allowedHeaders: ['Content-Type','Authorization'],
-    credentials: true
+    origin: ['http://localhost:3001','http://192.168.1.4:3001','https://tellmelife.vercel.app/*','http://localhost:3000',"https://tellmelife.vercel.app"]
 };
 
 thoughtRouter.options("/*",cors(corsOptions),(req,res)=>{
     res.status(200);
-});
+})
+
 
 thoughtRouter.get("/findthought",cors(corsOptions),(req,res)=>{
     (async function(){
