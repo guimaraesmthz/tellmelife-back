@@ -9,7 +9,7 @@ const corsOptions = {
     origin: ['http://localhost:3001','http://192.168.1.4:3001','https://tellmelife.vercel.app/*','http://localhost:3000',"https://tellmelife.vercel.app"]
 };
 
-thoughtRouter.options("/*",(req,res)=>{
+thoughtRouter.options("/*",cors(corsOptions),(req,res)=>{
     res.status(200);
 });
 
