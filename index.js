@@ -6,8 +6,9 @@ const { sql } = require("./db");
 const { errors } = require("celebrate");
 const { apiRouter } = require('./api');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
 (async function(){
