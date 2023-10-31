@@ -12,7 +12,7 @@ const corsOptions = {
 };
 
 thoughtRouter.options("/*",cors(corsOptions),(req,res)=>{
-    req.setHeader('Cache-Control','none');
+    res.setHeader('Cache-Control','none');
     res.status(200);
 });
 
