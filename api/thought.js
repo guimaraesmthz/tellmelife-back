@@ -48,7 +48,7 @@ thoughtRouter.post("/pre-thought",cors(corsOptions),checkAuth,celebrate({
     })
     .catch(()=>{
         res.setHeader('Content-Type','application/json');
-        res.status(201);
+        res.status(500);
         res.send(JSON.stringify({control:{code:500,message:"Internal Server Error. Try again later!"}}))
     });
 });
