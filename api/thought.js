@@ -28,7 +28,7 @@ thoughtRouter.get("/findthought",cors(corsOptions),(req,res)=>{
     
 });
 
-thoughtRouter.post("/pre-thought",cors(corsOptions),celebrate({
+thoughtRouter.post("/pre-thought",cors(corsOptions),checkAuth,celebrate({
     [Segments.BODY]:Joi.object().keys({
         thought:Joi.string().required().max(400)
     })
